@@ -1,0 +1,165 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% block content %}
+
+    <body>
+
+    <div class="main-wrapper">
+
+
+        <div class="page-wrapper">
+            <div class="content container-fluid">
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                            <h5 class="text-uppercase mb-0 mt-0 page-title">Invoice</h5>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                            <ul class="breadcrumb float-right p-0 mb-0">
+                                <li class="btn btn-white"><a href="#">PDF</a></li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <div class="row">
+                                    <div class="col-sm-6 m-b-20">
+                                        <img style="width: 100px; height: 40px" src="{% static 'assets/img/blog/arafat.jpg' %}" class="inv-logo" alt="">
+                                        <ul class="list-unstyled">
+                                            <li>Arafat</li>
+                                            <li>Karadeniz Technical University</li>
+                                            <li>{{ invoice.seller.address }}</li>
+                                            <li>Trabzon, D, 61000</li>
+                                            <li>Gst No: 4</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-sm-6 m-b-20">
+                                        <div class="invoice-details">
+                                            <h3 class="text-uppercase">Invoice #INV-000{{ invoice.inv_no }}</h3>
+                                            <ul class="list-unstyled">
+                                                <li>Date: <span>{{ invoice.datetime|date }}</span></li>
+                                                <li>Time: <span>{{ invoice.datetime|time }}</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-sm-6 col-lg-9 m-b-20">
+                                        <h5>Invoice to:</h5>
+                                        <ul class="list-unstyled">
+                                            <li><h5><strong>{{ invoice.customer.name }}</strong></h5></li>
+                                            <li><span>Global Technologies</span></li>
+                                            <li>Adress: {{ invoice.customer.address }}</li>
+                                            <li>Tel: {{ invoice.customer.phone_number }}</li>
+                                            <li>Email: {{ invoice.customer.email }}</li>
+
+
+
+
+                                        </ul>
+                                    </div>
+                                    <div class="col-sm-6 col-lg-3 m-b-20">
+                                        <span class="text-muted">Payment Details:</span>
+                                        <ul class="list-unstyled invoice-payment-details">
+
+                                                <li>
+                                                <h5>Total Due: <span class="text-right">$8,750</span></h5></li>
+
+
+
+
+                                            <li>Bank name: <span>Profit Bank Europe</span></li>
+                                            <li>Country: <span>United Kingdom</span></li>
+                                            <li>City: <span>London E1 8BF</span></li>
+                                            <li>Address: <span>3 Goodman street</span></li>
+                                            <li>IBAN: <span>KFH37784028476740</span></li>
+                                            <li>SWIft code: <span>BPT4E</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table custom-table">
+                                        <thead class="thead-light">
+                                        <tr>
+                                            <th>Invoice No</th>
+                                            <th>Product</th>
+                                            <th class="d-none d-sm-block">DESCRIPTION</th>
+                                            <th>Price</th>
+                                            <th>QUANTITY</th>
+                                            <th>TOTAL</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <tr>
+                                            <td>{{ invoice.inv_no }}</td>
+                                            <td>{{ invoice.product.name }}</td>
+                                            <td class="d-none d-sm-block">{{ invoice.description|truncatewords:10}}
+
+                                            </td>
+                                            <td>{{invoice.product.sell_price}}{{ invoice.product.currency_type }}</td>
+                                            <td>{{ invoice.product.count }}</td>
+                                            <td>$2000</td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div>
+                                    <div class="row invoice-payment">
+                                        <div class="col-sm-7">
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <div class="m-b-20 mt-2">
+                                                <h6>Total due</h6>
+                                                <div class="table-responsive no-border">
+                                                    <table class="table m-b-0">
+                                                        <tbody>
+                                                        <tr>
+                                                            <th>Subtotal:</th>
+                                                            <td class="text-right">$7,000</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Tax: <span class="text-regular">(25%)</span></th>
+                                                            <td class="text-right">$1,750</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Total:</th>
+                                                            <td class="text-right text-primary">
+                                                                <h5>$8,750</h5>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="invoice-info">
+                                        <h5>Other information</h5>
+                                        <p class="text-muted">{{ invoice.description }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    </body>
+
+{% endblock %}
